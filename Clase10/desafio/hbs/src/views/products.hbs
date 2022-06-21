@@ -1,0 +1,41 @@
+{{> nav}}
+
+<div class="container text-center mt-5">
+    <h2>VISTA DE TODOS LOS PRODUCTOS</h2>
+    <div class="row row-cols-1 row-cols-md-3 g-4 my-4">
+    {{#unless  products}}
+        <h1>No hay productos para mostrar</h1>
+    {{else}}
+        {{#each products}}
+        <div class="col">
+            <div class="card h-100">  
+                <a class="text-decoration-none text-dark" href="/productos/{{this.id}}">
+                    <img src={{this.thumbnail}} class="card-img-top d-block m-auto" alt={{this.title}} style="cursor:pointer">
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title">{{this.title}}</h5>
+                    <p class="card-text">Price: ${{this.price}} </p>
+                    <button class="btn btn-danger" onclick="deleteProduct({{this.id}})">Eliminar</button>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+    {{/unless}}
+    <div>
+        <a href="/"><button class="btn btn-dark my-3">REGRESAR AL FORMULARIO</button></a>
+    </div>
+</div>
+
+<script>
+    const deleteProduct = async (id)=>{
+        try{
+            const res = await fetch(`/productos/${id}`, {
+            method: "DELETE"
+            });
+        }catch (error) {
+            alert("error detectado: " + error.message);
+        }
+        location.reload()
+    }
+</script>
