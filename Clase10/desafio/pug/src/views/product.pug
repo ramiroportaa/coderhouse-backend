@@ -1,0 +1,50 @@
+extends layouts/index.pug
+block content
+
+    div(class="text-center container d-flex flex-column")
+        if error
+            h1=error
+        else
+            h1 PRODUCTO INDIVIDUAL
+            div(class="card my-5")
+                div(class="row g-0")
+                    div(class="col-md-4")
+                        img(src=thumbnail class="img-fluid rounded-start" alt=title)
+                    div(class="col-md-8")
+                        div(class="card-body")
+                        h5(class="card-title")=title
+                        p(class="card-text") This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer
+                        p(class="card-text")=`Price: ${price}`
+                        p(class="card-text")
+                            small(class="text-muted")=`Product ID: ${id}`
+                        button(class="btn btn-danger text-white me-3" onclick=`deleteProduct(${id})`) ELIMINAR
+                        button(class="btn btn-primary text-white" data-bs-toggle="modal" data-bs-target=`#producto${id}`) EDITAR
+
+            a(href="/productos")
+                button(class="btn btn-dark text-white") REGRESAR
+            
+            <!-- Modal -->
+            div(class="modal fade" id=`producto${id}` tabindex="-1" aria-labelledby=`producto${id}Label` aria-hidden="true")
+                div(class="modal-dialog modal-dialog-centered")
+                    div(class="modal-content")
+                        div(class="modal-header")
+                            h5(class="modal-title" id=`producto${id}Label`)=`Editar ${title}`
+                            button(type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close")
+                        div(class="modal-body")
+                            form(id="updateForm" data-product-id=`${id}`)
+                                label(for="title" class="form-label fw-bold") Titulo
+                                input(type="text" required name="title" class="form-control")
+                                span(class="fw-light")=`El titulo anterior: ${title}`
+                                br
+                                label(for="price" class="form-label fw-bold") Precio
+                                input(type="number" required name="price" step=".01" class="form-control")
+                                span(class="fw-light")=`El precio anterior: $${price}`
+                                br
+                                label(for="price" class="form-label fw-bold") Imagen
+                                input(type="text" required name="thumbnail" class="form-control")
+                        div(class="modal-footer")
+                            button(type="button" class="btn btn-secondary" data-bs-dismiss="modal") Close
+                            button(type="submit" form="updateForm" class="btn btn-primary") Guardar Cambios
+
+    script
+        include includes/scripts.js

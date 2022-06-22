@@ -1,0 +1,24 @@
+extends layouts/index.pug
+block content
+    div(class="container text-center mt-5")
+        h2 VISTA DE TODOS LOS PRODUCTOS
+        div(class="row row-cols-1 row-cols-md-3 g-4 my-4")
+            unless products.length
+                h4(class="text-center m-auto") No hay productos para mostrar
+            else
+                each product in products
+                    div(class="col")
+                        div(class="card h-100")
+                            a(class="text-decoration-none text-dark" href=`/productos/${product.id}`)
+                                img(src=product.thumbnail class="card-img-top d-block m-auto" alt=product.title style="cursor:pointer")
+
+                            div(class="card-body")
+                                h5(class="card-title")=product.title
+                                p(class="card-text")=`Price: $${product.price}`
+                                button(class="btn btn-danger" onclick=`deleteProduct(${product.id})`) Eliminar
+        div
+            a(href="/")
+                button(class="btn btn-dark my-3") REGRESAR AL FORMULARIO
+
+    script
+        include includes/scripts.js
