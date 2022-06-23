@@ -4,7 +4,7 @@
     <h2>VISTA DE TODOS LOS PRODUCTOS</h2>
     <div class="row row-cols-1 row-cols-md-3 g-4 my-4">
     {{#unless  products}}
-        <h1>No hay productos para mostrar</h1>
+        <h4 class="text-center m-auto">No hay productos para mostrar</h4>
     {{else}}
         {{#each products}}
         <div class="col">
@@ -20,8 +20,8 @@
             </div>
         </div>
         {{/each}}
-    </div>
     {{/unless}}
+    </div>
     <div>
         <a href="/"><button class="btn btn-dark my-3">REGRESAR AL FORMULARIO</button></a>
     </div>
