@@ -16,7 +16,7 @@ const createProduct = (req, res)=>{
     const producto = req.body;
     producto.price = Number(producto.price);
     const data = productsManager.add(producto);
-    res.render("product.ejs", data);
+    res.render("product.ejs", {data});
 }
 
 const updateProduct = (req, res)=>{
