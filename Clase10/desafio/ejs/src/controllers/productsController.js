@@ -8,8 +8,8 @@ const getProducts = (req, res)=>{
 const getProduct = (req, res)=>{
     const id = Number(req.params.id);
     const data = productsManager.getById(id);
-    if (data.error) return res.status(404).render("product.ejs", data);
-    res.status(200).render("product.ejs", data);
+    if (data.error) return res.status(404).render("product.ejs", {data});
+    res.status(200).render("product.ejs", {data});
 }
 
 const createProduct = (req, res)=>{
