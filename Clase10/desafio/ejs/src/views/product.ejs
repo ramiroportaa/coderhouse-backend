@@ -1,0 +1,94 @@
+<%- include("./layouts/headerLayout.ejs") %> 
+<%- include("./includes/nav.ejs") %> 
+
+<div class="text-center container d-flex flex-column">
+    
+    <h1>PRODUCTO INDIVIDUAL</h1>
+    <div class="card my-5">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img src="<%= thumbnail %>" class="img-fluid rounded-start" alt="<%= title %>">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                <h5 class="card-title"><%= title %></h5>
+                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                <p class="card-text">Price: $<%= price %></p>
+                <p class="card-text"><small class="text-muted">Product ID: <%= id %></small></p>
+                </div>
+                <button class="btn btn-danger text-white" onclick=<%=`deleteProduct(${id})`%> >ELIMINAR</button>
+                <button class="btn btn-primary text-white" data-bs-toggle="modal" data-bs-target="#producto<%=id%>">EDITAR</button>
+            </div>
+        </div>
+    </div>
+    <a href="/productos"><button class="btn btn-dark text-white">REGRESAR</button></a>
+    
+    <!-- Modal -->
+    <div class="modal fade" id="producto<%=id%>" tabindex="-1" aria-labelledby="producto<%=id%>Label" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="producto{{id}}Label">Editar <%=title%></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="updateForm" data-product-id="<%=id%>">
+                        <label for="title" class="form-label fw-bold">Titulo</label>
+                        <input type="text" required name="title" class="form-control">
+                        <span class="fw-light">El titulo anterior: <%=title%></span>
+                        </br>
+                        <label for="price" class="form-label fw-bold">Precio</label>
+                        <input type="number" required name="price" step=".01" class="form-control">
+                        <span class="fw-light">El precio anterior: $<%=price%></span>
+                        </br>
+                        <label for="thumbnail" class="form-label fw-bold">Imagen</label>
+                        <input type="text" required name="thumbnail" class="form-control">
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" form="updateForm" class="btn btn-primary">Guardar Cambios</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    const deleteProduct = async (id)=>{
+        try{
+            const res = await fetch(`/productos/${id}`, {
+            method: "DELETE"
+            });
+        }catch (error) {
+            alert("error detectado: " + error.message);
+        }
+        location.replace("/productos");
+    }
+
+    const updateProduct = async (e) => {
+        e.preventDefault();
+        const id = e.target.attributes["data-product-id"].value;
+        try{
+            const data = new FormData(e.target);
+            let obj = {};
+            data.forEach((value,key)=>obj[key]=value);
+            const fetching = await fetch(`/productos/${id}`,{
+                method: "PUT",
+                body: JSON.stringify(obj),
+                headers: {"Content-Type": "application/json"}
+            });
+            const res = await fetching.json();
+            location.reload();
+        }catch(error){
+            alert("error detectado: " + error.message);
+        }
+    };
+
+    const updateForm = document.querySelector("#updateForm");
+    updateForm.addEventListener("submit", updateProduct);
+
+</script>
+
+<%- include("./layouts/footerLayout.ejs") %> 

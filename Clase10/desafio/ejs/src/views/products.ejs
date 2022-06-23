@@ -1,0 +1,44 @@
+<%- include("./layouts/headerLayout.ejs") %> 
+<%- include("./includes/nav.ejs") %> 
+
+<div class="container text-center mt-5">
+    <h2>VISTA DE TODOS LOS PRODUCTOS</h2>
+    <div class="row row-cols-1 row-cols-md-3 g-4 my-4">
+    <% if(!products) {%> 
+        <h1>No hay productos para mostrar</h1>
+    <% } else { %> 
+        <% products.forEach( prod => { %>
+            <div class="col">
+                <div class="card h-100">  
+                    <a class="text-decoration-none text-dark" href=<%=`/productos/${prod.id}`%>>
+                        <img src="<%= prod.thumbnail %>" class="card-img-top d-block m-auto" alt="<%= prod.title %>"  style="cursor:pointer">
+                    </a>
+                    <div class="card-body">
+                        <h5 class="card-title"><%= prod.title %></h5>
+                        <p class="card-text">Price: $<%= prod.price %> </p>
+                        <button class="btn btn-danger" onclick=<%=`deleteProduct(${prod.id})`%> >Eliminar</button>
+                    </div>
+                </div>
+            </div>
+        <% }) %> 
+    </div>
+    <% } %> 
+    <div>
+        <a href="/"><button class="btn btn-dark my-3">REGRESAR AL FORMULARIO</button></a>
+    </div>
+</div>
+
+<script>
+    const deleteProduct = async (id)=>{
+        try{
+            const res = await fetch(`/productos/${id}`, {
+            method: "DELETE"
+            });
+        }catch (error) {
+            alert("error detectado: " + error.message);
+        }
+        location.reload()
+    }
+</script>
+
+<%- include("./layouts/footerLayout.ejs") %> 

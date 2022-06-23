@@ -1,0 +1,24 @@
+<%- include("./layouts/headerLayout.ejs") %> 
+<%- include("./includes/nav.ejs") %> 
+
+<div>
+    <div class="container text-center">
+        <div class="mb-4">
+            <h2>FORMULARIO DE CARGA DE PRODUCTOS</h2>
+            <form action="/productos" method="POST" class="mt-5">
+                <label for="title" class="form-label">Titulo</label>
+                <input type="text" required name="title" class="form-control">
+                <label for="price" class="form-label">Precio</label>
+                <input type="number" required name="price" step=".01" class="form-control">
+                <label for="thumbnail" class="form-label">Imagen</label>
+                <input type="text" required name="thumbnail" class="form-control" placeholder="https://imagen.com/img.jpg">
+                <button type="submit" class="btn btn-success mt-3">CARGAR</button>
+            </form>
+        </div>
+        <div>
+            <a href="/productos"><button class="btn btn-dark mt-4">VER TODOS LOS PRODUCTOS</button></a>
+        </div>
+    </div>
+</div>
+
+<%- include("./layouts/footerLayout.ejs") %> 
