@@ -1,0 +1,11 @@
+<% if (!messages.length) { %> 
+    <h4>No hay mensajes para mostrar</h4>
+<% } else { %>
+    <% messages.forEach( data => { %> 
+        <p>
+            <span class="text-primary fw-bold"><%= data.email  %>  </span>
+            [<span class="text-danger"><%= data.date %></span>]
+            : <span class="text-success fst-italic"><%= data.message %></span>
+        </p>
+    <% }) %> 
+<% } %> 
