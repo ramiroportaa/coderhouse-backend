@@ -6,8 +6,7 @@ class productsManager {
     }
     async getAll(){
         try {
-            const data = await fileManager.read("products.json");
-            this.products = data;
+            this.products = await fileManager.read("products.json");
             return {products: this.products};
         } catch (error) {
             console.log(`error in getting products: ${error}`);
@@ -16,8 +15,7 @@ class productsManager {
     }
     async getById(id){
         try {
-            const data = await fileManager.read("products.json");
-            this.products = data;
+            this.products = await fileManager.read("products.json");
             const product = this.products.find(prod => prod.id == id);
             if (product) return {product};
             return {error: {message: `no product with ID: ${id}`, status: 404}};
@@ -28,8 +26,7 @@ class productsManager {
     }
     async add(productData){
         try {
-            const data = await fileManager.read("products.json");
-            this.products = data;
+            this.products = await fileManager.read("products.json");
             const product = {
                 id: Number(this.products[this.products.length-1]?.id+1 || 1),
                 timestamp: Date.now(),
