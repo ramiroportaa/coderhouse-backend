@@ -8,6 +8,7 @@
 
 3) Dejo ejemplos de productos para pegar en el "products.json" en caso de querer hacer varias pruebas sin estar creando nuevos productos haciendo post desde postman.
 
+```json
 [{
     "id": 1,
     "timestamp": 159478265987,
@@ -45,7 +46,7 @@
     "precio": 19750,
     "stock": 9
 }]
-
+```
 
 ### Consigna:
 Deberás entregar el estado de avance de tu aplicación eCommerce Backend, que implemente un servidor de aplicación basado en la plataforma Node.js y el módulo express. El servidor implementará dos conjuntos de rutas agrupadas en routers, uno con la url base '/productos' y el otro con '/carrito'. El puerto de escucha será el 8080 para desarrollo y process.env.PORT para producción en glitch.com
