@@ -17,7 +17,7 @@ const main = async ()=>{
         //data = await userModel.create(usersArray);
         //console.log("usuarios creados exitosamente");
 
-        data = await userModel.find();
+        data = userModel.collection.name
         console.log(data);
 
         //data = await userModel.create({nombre: 'Federico', apellido: 'Perez', dni: '320118321'});
