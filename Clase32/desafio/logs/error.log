@@ -1,0 +1,1 @@
+[ERROR] | 04-09-2022 21:06 | pid: 13400: error al obtener productos | Error: connect ECONNREFUSED 127.0.0.1:3306
