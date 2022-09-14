@@ -9,7 +9,6 @@ import passport from "passport";
 import indexRouter from "./routes/indexRouter.js";
 import loginRouter from "./routes/loginRouter.js";
 import logoutRouter from "./routes/logoutRouter.js";
-import productTestFakerRouter from "./routes/productTestFakerRouter.js";
 import registerRouter from "./routes/registerRouter.js";
 import infoProcessRouter from "./routes/infoProcessRouter.js";
 import randomsRouter from "./routes/randomsRouter.js";
@@ -89,8 +88,7 @@ if (isCluster && cluster.isPrimary) {
     app.use("/register", registerRouter);
     app.use("/login", loginRouter);
     app.use("/logout", logoutRouter);
-    //Ruta de testeo con Faker.js
-    app.use("/api/productos-test", productTestFakerRouter);
+
     //Ruta informativa del process (clase 28).
     app.use("/info", infoProcessRouter);
     //Ruta para testear child process (clase 28).

@@ -4,7 +4,6 @@ import logger from "../logger.js";
 const getProducts = async (io, socket) =>{
     try {
         const products = await productsModel.getAll();
-        console.log(products);
 
         socket.emit("server:products", products);
         socket.on("client:newProduct", async (data) => {
