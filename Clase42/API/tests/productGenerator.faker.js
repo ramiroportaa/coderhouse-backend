@@ -7,7 +7,7 @@ const get = () => ({
     codigo: `xxx${faker.random.numeric(3)}`,
     precio: faker.commerce.price(1000),
     stock: faker.random.numeric(2),
-    foto: faker.image.fashion(400,400, true)
+    foto: faker.image.food(400,400, true)
 })
 
 export default {get};
