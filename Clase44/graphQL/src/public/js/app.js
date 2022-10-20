@@ -11,12 +11,29 @@ const getIdCartFromAPI = async ()=>{
 }
 
 //Funciones de inteaccion con la API
+
     //Fetchs a /api/productos
         //Obtener todos los productos y pushearlos al array de productos.
 const getProductsFromAPI = async ()=>{
-    let res = await fetch("/api/productos");
+    const graphqlQuery = {
+        "query": `query{
+            getProducts{
+              _id
+              nombre
+              foto
+              precio
+              descripcion
+            }}`
+    };
+
+    let res = await fetch("/api/graphql", {
+        method: "POST",
+        headers: {"content-type": "application/json"},
+        body: JSON.stringify(graphqlQuery)
+    });
+
     res = await res.json();
-    productos = res.data;
+    productos = res.data.getProducts;
 }
         //Obtener un solo producto por su ID.
 const getProductByIdFromAPI = async (id)=>{
